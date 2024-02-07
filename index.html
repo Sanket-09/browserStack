@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js" integrity="sha384-Gr6Lu2Ajx28mzwyVR8CFkULdCU7kMlZ9UthllibdOSo6qAiN+yXNHqtgdTvFXMT4" crossorigin="anonymous"></script>
+
+
+
+
+    <script>
+        var socket = io("ws://localhost:3000");
+        socket.on('updated-log', function(data) {
+            console.log(data);
+            for (elem of data) {
+                document.getElementById('message-container').innerHTML += '<p>' + elem + '</br> <p>';
+            }
+        });
+
+        socket.on('initial-logs', function(data) {
+            console.log(data);
+            for (elem of data) {
+                document.getElementById('message-container').innerHTML += '<p>' + elem + '</br> <p>';
+            }
+        })
+    </script>
+
+</head>
+
+<body>
+    <h2>log monitoring client</h2>
+    <div id="message-container"></div>
+
+
+</body>
+
+</html>
